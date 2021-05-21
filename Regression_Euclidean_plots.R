@@ -9,7 +9,6 @@ length_tms_dickens <- length(times_dickens)
 length_tms_austen <- length(times_austen)
 
 ######DICKENS#######
-#Approach B
 coeff_intercept_dic<-matrix(0,m,m)
 coeff_diff_dic<-matrix(0,m,m)
 for (i in 1:m)
@@ -39,7 +38,6 @@ points(predict(pca, newdata = t(vectorized_pred_glB_dic))[,1:2])
 #____________________________________________________________________
 
 ########AUSTEN############
-#Approach B
 coeff_intercept_aus<-matrix(0,m,m)
 coeff_diff_aus<-matrix(0,m,m)
 for (i in 1:m)
@@ -75,10 +73,7 @@ abline(lm(predict(pca, newdata = t(vectorized_pred_glB_dic))[,2] ~ predict(pca, 
 abline(lm(predict(pca, newdata = t(vectorized_pred_glB_aus))[,2] ~ predict(pca, newdata = t(vectorized_pred_glB_aus))[,1])$coef, col=2)
 
 #or grayscale
-
 plot(pca$x[,1:2], col=1, ylab='coordinate 2', xlab='coordinate 1', cex=0.1)
 text(pca$x[,1:2],labels=label, col=gray.colors(25, start = 0, end = 0.7)[rank(times)], cex=0.5)
-#points(predict(pca, newdata = t(vectorized_pred_glB_dic))[,1:2],col=1,pch=19,cex=0.1)
-#points(predict(pca, newdata = t(vectorized_pred_glB_aus))[,1:2],col=1,pch=19,cex=0.1)
 abline(lm(predict(pca, newdata = t(vectorized_pred_glB_dic))[,2] ~ predict(pca, newdata = t(vectorized_pred_glB_dic))[,1])$coef, col=1, lty=2)
 abline(lm(predict(pca, newdata = t(vectorized_pred_glB_aus))[,2] ~ predict(pca, newdata = t(vectorized_pred_glB_aus))[,1])$coef, col=1)
