@@ -18,7 +18,7 @@ Dmateucl<-Dmat
 
 
 
-nt<-nr
+
 Dmat<-matrix(0,nt,nt)
 for (i in 1:(nt-1)){
   print(i)
@@ -33,7 +33,7 @@ text(cmdscale(Dmat),labels=1:nt)
 lines(cmdscale(Dmat))
 Dmatsqrt<-Dmat
 
-nt<-nr
+
 Dmat<-matrix(0,nt,nt)
 for (i in 1:(nt-1)){
   print(i)
@@ -49,9 +49,8 @@ lines(cmdscale(Dmat))
 Dmatproc<-Dmat
 
 
-#save as 230 by 230 pixels
+
 novcol<-c(rep(2,times=16),rep(4,times=7))
-dickens_austen_ids[17:23]<-c("em","pe","pr","ls","ma","no","se")
 
 dend<-hclust(as.dist(Dmateucl),method="ward.D2") 
 plot(dend,labels=dickens_austen_ids, xlab="", main="", sub="", cex=0.5, xaxt='n')
