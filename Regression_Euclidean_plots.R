@@ -1,4 +1,4 @@
-source('PCA_Euclidean')
+source('PCA_Euclidean.R')
 m<-1000
 pca<-PCA_euc$pca
 cat<-author_col

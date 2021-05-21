@@ -387,3 +387,110 @@ Interpolation <-
   }
 
 ########
+
+
+
+########
+estSS3<-function (S) 
+{
+  M <- dim(S)[3]
+  k <- dim(S)[1]
+  Q <- array(0, c(k, k, M))
+  for (j in 1:M) {
+    Q[, , j] <-  (rootmat(S[, , j]))
+  }
+  ans <- fgpa.rot(Q, tol1=1e-05, tol2=1e-05, proc.output = TRUE, 
+                  reflect = TRUE)   
+  out<-ans$mshape %*% t(ans$mshape)
+  ans2<-list(mshape=0,tan=0)
+  ans2$mshape<-(out+t(out))/2
+  ans2$tan<-matrix(0,k*k,M)
+  for (i in 1:M){
+    ans2$tan[,i]<-c(t(ans$r.s.r[,,i]-ans$mshape))
+  }
+  ans2
+}
+#Description : procrustes tangent coordinate
+########
+
+
+########
+
+PCA_GL <- function(gl_list,
+                   euc = TRUE,
+                   sqrt = FALSE,
+                   proc = FALSE)
+{
+  amount_words <- dim(gl_list[[1]])[1]
+  n <- length(gl_list)
+  
+  if ((euc == TRUE) && (sqrt == FALSE) && (proc == FALSE))
+  {
+    eucmean <- (Mean_GL(
+      gl_list,
+      euc = TRUE,
+      sqrt = FALSE,
+      proc = FALSE
+    ))
+    vectorized_euc <- matrix(0, amount_words * amount_words , n)
+    for (i in 1:n)
+    {
+      vectorized_euc[, i] <-as.vector(gl_list[[i]])
+    }
+    pca <- prcomp(t(vectorized_euc), center = TRUE)
+    PC1_euc <- matrix(pca$rotation[, 1], amount_words, amount_words)
+    return(list(
+      pca = pca,
+      PC1 = PC1_euc,
+      eigenvl_S = pca$sdev ^ 2
+    ))
+  }
+  if ((euc == FALSE) && (sqrt == TRUE) && (proc == FALSE))
+  {
+    sqrtmean <- (Mean_GL(
+      gl_list,
+      euc = FALSE,
+      sqrt = TRUE,
+      proc = FALSE
+    ))
+    sqrted_sqrtmean <- rootmat(sqrtmean)
+    sqrted_gl <- gl_list
+    for (i in 1:n) {
+      sqrted_gl[[i]] <- rootmat(gl_list[[i]])
+    }
+    vectorized_sqrt <- matrix(0, amount_words * amount_words , n)
+    for (i in 1:n)
+    {
+      for (j in 1:amount_words)
+        vectorized_sqrt[((j - 1) * amount_words + 1):(j * amount_words), i] <-
+          sqrted_gl[[i]][, j] - sqrted_sqrtmean[, j]
+    }
+    pca <- prcomp(t(vectorized_sqrt), center = FALSE)
+    PC1_sqrt <- matrix(pca$rotation[, 1], amount_words, amount_words)
+    return(list(
+      pca = pca,
+      PC1 = PC1_sqrt,
+      eigenvl_S = pca$sdev ^ 2
+    ))
+  }
+  if ((euc == FALSE) && (sqrt == FALSE) && (proc == TRUE))
+  {
+    proc_array <- array(0, dim = c(amount_words, amount_words, n))
+    for (i in 1:n)
+      proc_array[, , i] <- as.matrix(gl_list[[i]])
+    proc_tan <- estSS3(proc_array)$tan
+    vectorized_proc <- matrix(0, amount_words * amount_words , n)
+    for (i in 1:n)
+      vectorized_proc[, i] <- as.vector(proc_tan[, i])
+    pca <- prcomp(t(vectorized_proc), center = FALSE)
+    PC1_proc <- matrix(pca$rotation[, 1], amount_words, amount_words)
+    return(list(
+      pca = pca,
+      PC1 = PC1_proc,
+      eigenvl_S = pca$sdev ^ 2
+    ))
+  }
+}  
+#Description: PCA
+
+#########

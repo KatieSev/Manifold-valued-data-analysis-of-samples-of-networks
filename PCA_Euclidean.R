@@ -40,10 +40,6 @@ for (i in (m-9):m){
 }
 
 
-
-
-
-
 ##################
 #Barplot to look at degree in PCs
 PC2_euc <-matrix(PCA_euc$pca$rotation[,2],m,m)
