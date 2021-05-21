@@ -275,7 +275,14 @@ Mean_GL <- function(Array,
 #and if the mean should be projected into the graph Laplacian space
 ########
 
-
+#######
+G_2 <- function(mat){
+  B<- (mat+t(mat))/2
+  H <- rootmat(t(B)%*%B)
+  return((B+H)/2)
+}
+#Description: function to apply before projection for square root
+#######
 
 
 #######
