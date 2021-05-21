@@ -1,15 +1,16 @@
-#library(Matrix)
-#library(matrixcalc)
-#library(igraph)
+library(Matrix)
+library(matrixcalc)
+library(igraph)
 library(shapes)
-#library(gdata)
+library(gdata)
 #library(OpenMx)
 #library(CVXR)
-#library(ggraph)
+library(ggraph)
 #library(rtweet)
-#library(rosqp)
+library(rosqp)
 #library(abind)
 #library(network)
+#library(MASS)
 #####
 ######
 
@@ -69,6 +70,36 @@ is.laplacian <- function(L, tol = 1e-08) {
 }
 #Description: tests for graph Laplacian objects
 #######
+
+
+#######
+ggraph_plot <- function(GL, label_nodes=0, quantile_edges=0, delete_edges=0, tol=-10^-10, colour_node='slateblue', colour_line='springgreen')#delete nodes less then degree of label nodes,
+  #set anything belew quantile edges to this quantile, delete edges less then delete edges quantile
+{GL[GL> tol]<-0
+graph<-igraph_from_lapl(GL, TRUE)
+igraph::V(graph)$node_label <- unname(ifelse(strength(graph)[igraph::V(graph)] >label_nodes, names(igraph::V(graph)), "")) 
+igraph::V(graph)$node_size <- unname(ifelse(strength(graph)[igraph::V(graph)] > label_nodes, strength(graph), 0))
+
+graph<-delete_edges(graph,E(graph)[E(graph)$weight[E(graph)]< quantile(E(graph)$weight,delete_edges)]) 
+E(graph)$test<-E(graph)$weight
+E(graph)$test[E(graph)$test<quantile(E(graph)$test,quantile_edges)]<-quantile(E(graph)$test,quantile_edges)
+
+ggraph(graph, layout = 'linear', circular = TRUE) + 
+  geom_edge_arc(edge_width=0.125, aes(alpha=(E(graph)$test)^1)) +
+  geom_node_label(aes(label=node_label, size=node_size),
+                  label.size=0, fill="#ffffff66", segment.colour=colour_line,
+                  color=colour_node, repel=TRUE,  fontface="bold") +
+  coord_fixed() +
+  scale_size_area(trans="sqrt") +
+  labs(title="", subtitle="") +
+  theme_graph() +
+  theme(legend.position="none")}
+
+#Description :plot laplcians
+#######
+
+
+
 
 
 ########
@@ -242,4 +273,110 @@ Mean_GL <- function(Array,
 }
 #Description: Calculating the mean of an array of graph Laplacians, option for different metrics
 #and if the mean should be projected into the graph Laplacian space
+########
+
+
+
+
+#######
+Interpolation <-
+  function(GL1,
+           GL2,
+           c,
+           euc = TRUE,
+           sqrt = FALSE,
+           proc = FALSE,
+           proj_opt = TRUE){
+    if ((euc == TRUE) &&
+        (sqrt == FALSE) && (proc == FALSE) && (proj_opt == TRUE))
+    {
+      diff_euc <- GL2 - GL1
+      un_proj <- GL1 + c * diff_euc
+      int <- proj_sparse(un_proj)
+      dist_ofproj <- norm(int - un_proj, type = 'f')
+      return(list(
+        int = as.matrix(int) ,
+        un_proj = un_proj ,
+        diff = diff_euc,
+        dist = dist_ofproj
+      ))
+    }
+    
+    if ((euc == FALSE) &&
+        (sqrt == TRUE) && (proc == FALSE) && (proj_opt == TRUE))
+    {
+      sqrt1 <- rootmat(GL1)
+      sqrt2 <- rootmat(GL2)
+      diff_sqrt <- sqrt2 - sqrt1
+      un_proj <- G_2(sqrt1 + c * diff_sqrt)%*%t(G_2(sqrt1 + c * diff_sqrt))
+      int <- proj_sparse(un_proj)
+      dist_ofunproj <- norm(rootmat(int) - rootmat(un_proj), type = 'f')
+      return(list(
+        int = as.matrix(int) ,
+        un_proj = un_proj
+        ,
+        complete_un_proj = sqrt1 + c * diff_sqrt,
+        diff = ((diff_sqrt) %*% t(diff_sqrt)),
+        diff_sq = diff_sqrt,
+        dist = dist_ofunproj
+      ))
+    }
+    
+    if ((euc == FALSE) &&
+        (sqrt == FALSE) && (proc == TRUE) && (proj_opt == TRUE))
+    {   m <- dim(GL1)[1]
+    shape1 <- rootmat(GL1)
+    shape2 <- rootmat(GL2)
+    proc12 <- procOPA(shape1, shape2, scale = FALSE, reflect = TRUE)$Bhat
+    sqrt_int <- procOPA(shape1, c*proc12+(1-c)*shape1, scale = FALSE, reflect = TRUE)$Bhat
+    diff_proc <- proc12 - shape1
+    un_proj <-
+      ( t(sqrt_int)%*%sqrt_int)
+    int <- proj_sparse(un_proj)
+    dist_ofunproj <-
+      procdist(
+        rootmat(un_proj),
+        rootmat(int),
+        type = 'sizeandshape',
+        reflect = TRUE
+      )
+    return (list(
+      int = as.matrix(int) ,
+      un_proj = un_proj,
+      diff = (((diff_proc)) %*% t((diff_proc))) ,
+      dist = dist_ofunproj
+    ))
+    }
+    
+    
+    if ((euc == FALSE) &&
+        (sqrt == FALSE) && (proc == old_way) && (proj_opt == TRUE))
+    {
+      m <- dim(GL1)[1]
+      shape1 <- rootmat(GL1)
+      shape2 <- rootmat(GL2)
+      proc12 <- procOPA(shape1, shape2, scale = FALSE, reflect = TRUE)$Bhat
+      sqrt_int <- procOPA(shape1, c*proc12+(1-c)*shape1, scale = FALSE, reflect = TRUE)$Bhat
+      diff_proc <- proc12 - shape1
+      un_proj <-
+        ( sqrt_int%*%t(sqrt_int)) #this is what I used to do, new way has transpose times not transpose
+      int <- proj_sparse(un_proj)
+      dist_ofunproj <-
+        procdist(
+          rootmat(un_proj),
+          rootmat(int),
+          type = 'sizeandshape',
+          reflect = TRUE
+        )
+      return (list(
+        int = as.matrix(int) ,
+        un_proj = un_proj,
+        diff = (((diff_proc)) %*% t((diff_proc))) ,
+        dist = dist_ofunproj
+      ))
+    }
+    else
+      return(0)
+  }
+
 ########
