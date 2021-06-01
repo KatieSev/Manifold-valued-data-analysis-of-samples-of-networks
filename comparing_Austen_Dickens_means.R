@@ -92,12 +92,6 @@ set.seed(2)
 plot(ggnet2(ggn,edge.alpha=0.5,label=words[nzn],color="yellow"))
 
 
-#In<-asIgraph( ggn )
-#l2<-layout_in_circle(In)
-#l <-layout_with_fr(In)
-#plot(In,vertex.label=words[nzn],layout=l,edge.arrow.mode=0,vertex.size=14,edge.curved=0,vertex.color="yellow")
-
-
 #####################################
 #significantly more in Austen
 #get the top 100 pairs
@@ -120,8 +114,3 @@ AAAusten<-A[nzn,nzn]
 ggn<-network(AAAusten)
 set.seed(2)
 plot(ggnet2(ggn,edge.alpha=0.5,label=words[nzn],color="cyan"))
-
-#In<-asIgraph( ggn )
-#l2<-layout_in_circle(In)
-#l <-layout_with_fr(In)
-#plot(In,vertex.label=words[nzn],layout=l,edge.arrow.mode=0,vertex.size=14,edge.curved=0,vertex.color="cyan")
