@@ -11,6 +11,8 @@ library(rosqp)
 #library(abind)
 #library(network)
 #library(MASS)
+library(GGally)
+library(sna)
 #####
 ######
 
