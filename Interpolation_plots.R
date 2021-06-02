@@ -17,9 +17,9 @@ colnames(int_euc_6) <- words
 rownames(int_euc_min5) <- words
 colnames(int_euc_min5) <- words
 
-ggraph_plot(int_euc_0pt5[1:25,1:25],0, quantile_edges=0.95,  tol=-1*10^-16, colour_node = 'black', colour='black')
-ggraph_plot(int_euc_6[1:25,1:25],0, quantile_edges=0.95,  tol=-1*10^-16, colour_node = 'black', colour='black')
-ggraph_plot(int_euc_min5[1:25,1:25],0, quantile_edges=0.95,  tol=-1*10^-16, colour_node = 'black', colour='black')
+ggraph_plot(int_euc_0pt5[1:25,1:25],0, quantile_edges=0.95,  tol=-1*10^-8, colour_node = 'black', colour='black')
+ggraph_plot(int_euc_6[1:25,1:25],0, quantile_edges=0.95,  tol=-1*10^-8, colour_node = 'black', colour='black')
+ggraph_plot(int_euc_min5[1:25,1:25],0, quantile_edges=0.95,  tol=-1*10^-8, colour_node = 'black', colour='black')
 
 
 ####__________________________________________________________________
@@ -37,9 +37,9 @@ colnames(int_sqrt_6) <- words
 rownames(int_sqrt_min5) <- words
 colnames(int_sqrt_min5) <- words
 
-ggraph_plot(int_sqrt_0pt5[1:25,1:25],0, 0.95,  tol=-1*10^-16, colour_node = 'black', colour_line='black')
-ggraph_plot(int_sqrt_6[1:25,1:25],0, 0.95,  tol=-1*10^-16, colour_node = 'black', colour_line='black')
-ggraph_plot(int_sqrt_min5[1:25,1:25],0, 0.95,  tol=-1*10^-16, colour_node = 'black', colour_line='black')
+ggraph_plot(int_sqrt_0pt5[1:25,1:25],0, 0.95,  tol=-1*10^-8, colour_node = 'black', colour_line='black')
+ggraph_plot(int_sqrt_6[1:25,1:25],0, 0.95,  tol=-1*10^-8, colour_node = 'black', colour_line='black')
+ggraph_plot(int_sqrt_min5[1:25,1:25],0, 0.95,  tol=-1*10^-8, colour_node = 'black', colour_line='black')
 
 ####____________________________________________________________________
 #procrustes
@@ -56,6 +56,6 @@ colnames(int_proc_6) <- words
 rownames(int_proc_min5) <- words
 colnames(int_proc_min5) <- words
 
-ggraph_plot(int_proc_0pt5[1:25,1:25],0, 0.95,  tol=-1*10^-16, colour_node = 'black', colour_line='black')
-ggraph_plot(int_proc_min5[1:25,1:25],0, 0.95,  tol=-1*10^-16, colour_node = 'black', colour_line='black')
-ggraph_plot(int_proc_6[1:25,1:25],0, 0.95,  tol=-1*10^-16, colour_node = 'black', colour_line='black')
+ggraph_plot(int_proc_0pt5[1:25,1:25],0, 0.95,  tol=-1*10^-8, colour_node = 'black', colour_line='black')
+ggraph_plot(int_proc_6[1:25,1:25],0, 0.95,  tol=-1*10^-8, colour_node = 'black', colour_line='black')
+ggraph_plot(int_proc_min5[1:25,1:25],0, 0.95,  tol=-1*10^-8, colour_node = 'black', colour_line='black')
