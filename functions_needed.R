@@ -496,3 +496,104 @@ PCA_GL <- function(gl_list,
 #Description: PCA
 
 #########
+########
+
+
+distance_between_gl <- function(GL_1,
+                                GL_2,
+                                euc = TRUE,
+                                sqrt = FALSE,
+                                proc = FALSE) {
+  if ((euc == TRUE) && (sqrt == FALSE) && (proc == FALSE)) {
+    return(norm(GL_1 - GL_2, type = 'f'))
+  }
+  
+  if ((euc == FALSE) && (sqrt == TRUE) && (proc == FALSE)) {
+    return(norm(rootmat(GL_1) - rootmat(GL_2), type = 'f'))
+  }
+  
+  if ((euc == FALSE) && (sqrt == FALSE) && (proc == TRUE)) {
+    return(procdist(
+      rootmat(GL_1),
+      rootmat(GL_2),
+      type = 'sizeandshape',
+      reflect = TRUE
+    ))
+  }
+  
+  else
+    print('Error, one and only one metric must be TRUE')
+}
+#Description: Calculate distances between graph Laplacians for the Eulcidean (alpha= 0.5, 1) 
+#and Procrustes metric (alpha=0.5)
+#######
+
+
+
+
+#######
+dist_sq_means <-
+  function(GL1_array,
+           GL2_array,
+           euc = TRUE,
+           sqrt = FALSE,
+           proc = FALSE) {
+    if ((euc == TRUE) && (sqrt == FALSE) && (proc == FALSE)) {
+      mean1 <- Mean_GL(GL1_array,
+                       euc = TRUE,
+                       sqrt = FALSE,
+                       proc = FALSE)
+      mean2 <- Mean_GL(GL2_array,
+                       euc = TRUE,
+                       sqrt = FALSE,
+                       proc = FALSE)
+      return(distance_between_gl(
+        mean1,
+        mean2,
+        euc = TRUE,
+        sqrt = FALSE,
+        proc = FALSE
+      ) ^ 2)
+    }
+    
+    if ((euc == FALSE) && (sqrt == TRUE) && (proc == FALSE)) {
+      mean1 <- Mean_GL(GL1_array,
+                       euc = FALSE,
+                       sqrt = TRUE,
+                       proc = FALSE)
+      mean2 <- Mean_GL(GL2_array,
+                       euc = FALSE,
+                       sqrt = TRUE,
+                       proc = FALSE)
+      return(distance_between_gl(
+        mean1,
+        mean2,
+        euc = FALSE,
+        sqrt = TRUE,
+        proc = FALSE
+      ) ^ 2)
+    }
+    
+    if ((euc == FALSE) && (sqrt == FALSE) && (proc == TRUE)) {
+      mean1 <- Mean_GL(GL1_array,
+                       euc = FALSE,
+                       sqrt = FALSE,
+                       proc = TRUE)
+      mean2 <- Mean_GL(GL2_array,
+                       euc = FALSE,
+                       sqrt = FALSE,
+                       proc = TRUE)
+      return(distance_between_gl(
+        mean1,
+        mean2,
+        euc = FALSE,
+        sqrt = FALSE,
+        proc = TRUE
+      ) ^ 2)
+    }
+    
+    else
+      print('Error, one and only one metric must be TRUE')
+  }
+#Description: Test statistic for certain metrics
+
