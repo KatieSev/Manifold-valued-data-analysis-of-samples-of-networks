@@ -19,11 +19,11 @@ source('Regression_Squareroot_plots.R')
 source('Regression_Procrustes_plots.R')
 
 #Regression Wilks test
-
+source('Regression_Wilks_Theorem.R')
 
 #Permutation test
-
+source('permutation_test_Austen_Dickens.R')
 
 #Comparing means with z-type test
-
+source('comparing_Austen_Dickens_means.R')
 

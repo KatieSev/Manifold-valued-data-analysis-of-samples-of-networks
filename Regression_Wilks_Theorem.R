@@ -68,6 +68,7 @@ for (i in 1:16)
 -2*(sum(f_0)-sum(f_1))
 pchisq(-2*(sum(f_0)-sum(f_1)), m*(m-1)/2) #1-this is p-val
 p_val_dick_euc <- 1-pchisq(-2*(sum(f_0)-sum(f_1)), m*(m-1)/2) #if this is small then evidence that regression exists
+print(c('the p value for existance of linear regression for the Dickens sample is ', p_val_dick_euc))
 qchisq(0.95,m*(m-1)/2)
 
 
@@ -136,4 +137,7 @@ for (i in 1:7)
 -2*(sum(f_0)-sum(f_1))
 pchisq(-2*(sum(f_0)-sum(f_1)), m*(m-1)/2)
 p_val_aust_euc <- 1-pchisq(-2*(sum(f_0)-sum(f_1)), m*(m-1)/2)#if this is small then evidence that regression exists
+print(c('the p value for existance of linear regression for the Austen sample is ', p_val_aust_euc))
 qchisq(0.95,m*(m-1)/2)
+
+
