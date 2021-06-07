@@ -1,5 +1,5 @@
-source('functions_needed.R')
-load("workspace for novels.RData")
+#source('functions_needed.R')
+#load("workspace for novels.RData")
 
 
 #PERFORM PCA

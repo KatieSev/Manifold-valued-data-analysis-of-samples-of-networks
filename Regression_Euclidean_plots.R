@@ -1,6 +1,8 @@
+#source('functions_needed.R')
+#load("workspace for novels.RData")
 source('PCA_Euclidean.R')
 
-m <- 1000
+m<-dim(List_L[[1]])[1]
 pca <- PCA_euc$pca
 
 #times to make predictions at

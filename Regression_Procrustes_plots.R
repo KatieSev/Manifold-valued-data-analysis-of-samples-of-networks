@@ -1,7 +1,9 @@
+#source('functions_needed.R')
+#load("workspace for novels.RData")
 source('PCA_Procrustes.R')
 
 #Result 2.2.2 in thesis is important on why we dont need helmet matrix
-m <- 1000
+m<-dim(List_L[[1]])[1]
 times_dickens <- seq(1836,1870,1)
 times_austen <- seq(1794, 1815,1)
 ntms_D <- length(times_dickens)

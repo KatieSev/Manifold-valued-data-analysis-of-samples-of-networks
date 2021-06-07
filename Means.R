@@ -1,9 +1,5 @@
 #source('functions_needed.R')
 #load("workspace for novels.RData")
-#topwords<-1000
-
-L <- L[1:topwords,1:topwords, ]
-
 
 #####################
 #dickens

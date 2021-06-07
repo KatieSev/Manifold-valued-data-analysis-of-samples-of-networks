@@ -1,8 +1,7 @@
-source('functions_needed.R')
-load("workspace for novels.RData")
+#source('functions_needed.R')
+#load("workspace for novels.RData")
 
-
-m <- 1000
+m<-dim(List_L[[1]])[1]
 Hel <- defh(m-1)
 
 

@@ -1,3 +1,12 @@
+source('functions_needed.R')
+load("workspace for novels.RData")
+
+topwords <- 100 #code in paper is for topwords=1000
+L<- L[1:topwords,1:topwords, ]
+for (i in 1:23){
+  List_L[[i]] <- List_L[[i]][1:topwords,1:topwords]
+}
+
 
 #MDS and dendrogram plots
 source('MDS_plots.R')
@@ -6,7 +15,7 @@ source('MDS_plots.R')
 source('Means.R')
 
 #interpolation plots
-source('Interpolation_plos.R')
+source('Interpolation_plots.R')
 
 #PCA plots
 source('PCA_Euclidean.R')

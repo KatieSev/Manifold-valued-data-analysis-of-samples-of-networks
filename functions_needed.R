@@ -164,7 +164,7 @@ proj_sparse <- function(x0){
     l<-u
     A<-P
     sq<-1/sqrt(2)
-    print("setting up constraints - only needs doing once - can it be sped up?")
+    #print("setting up constraints - only needs doing once - can it be sped up?")
     l[nodiag_index[1:p,]]<- -Inf
     #this loop is slow - how to speed up
     for (i in 1:p){

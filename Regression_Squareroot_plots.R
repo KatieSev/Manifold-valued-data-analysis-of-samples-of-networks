@@ -1,6 +1,7 @@
+#source('functions_needed.R')
+#load("workspace for novels.RData")
 source('PCA_Squareroot.R')
-
-m <- 1000
+m<-dim(List_L[[1]])[1]
 
 #times to make predictions at
 times_dickens <- seq(1836,1870,1)

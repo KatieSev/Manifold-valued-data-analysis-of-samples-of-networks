@@ -1,6 +1,10 @@
-source('functions_needed.R')
-load("workspace for novels.RData")
+#source('functions_needed.R')
+#load("workspace for novels.RData")
 
+m<-dim(List_L[[1]])[1]
+
+LC<-LC[1:m,1:m,]
+words <- words[1:m]
 
 #####################################################################
 # test set up

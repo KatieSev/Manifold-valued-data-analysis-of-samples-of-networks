@@ -1,6 +1,7 @@
-source('functions_needed.R')
-load("workspace for novels.RData")
+#source('functions_needed.R')
+#load("workspace for novels.RData")
 
+m<-dim(List_L[[1]])[1]
 C <- 1000 #permutations
 
 ########Euclidean###########
@@ -48,4 +49,4 @@ for (j in 1:C)
                                     euc = FALSE, sqrt = FALSE, proc = TRUE)
 }
 plot(density(dist_vec_proc), main='', xlab=expression({d[S]^{"2"}} (bar(A), bar(B))), xlim=c(0,0.025))
-abline(v=dickens_austen_proc,col=2)
+abline(v=dickens_austen_proc_2,col=2)
