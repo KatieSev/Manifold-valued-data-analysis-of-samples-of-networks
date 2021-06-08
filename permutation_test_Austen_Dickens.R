@@ -2,7 +2,7 @@
 #load("workspace for novels.RData")
 
 m<-dim(List_L[[1]])[1]
-C <- 1000 #permutations
+C <- 100 #permutations  (used 1000 in the paper)
 
 ########Euclidean###########
 dickens_austen_euc_2 <- (dist_sq_means(L[,,1:16],L[,,17:23],euc=TRUE, sqrt=FALSE, proc=FALSE))
