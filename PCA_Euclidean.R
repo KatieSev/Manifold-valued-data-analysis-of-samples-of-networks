@@ -50,7 +50,7 @@ order_weight_euc_2<-rbind(sort(diag(PC2_euc)/sum(diag(abs(PC2_euc)))))
 
 barpos<-barplot(as.vector(order_weight_euc_2)[c(1:10, (m-9):m)],beside=T,col=c('black'), names.arg = rep("",20),
                 ylim=c(-0.15,0.09))
-axis(1, lwd.tick=0, labels=FALSE)
+axis(1, lwd.tick=0, labels=FALSE,at=c(0,24))
 
 for (i in 1:10){
   axis(1, at = barpos[i], label="", tck = -0.01)
