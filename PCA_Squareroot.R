@@ -10,4 +10,4 @@ plot(pca_sqrt$pca$x[,1:2], col=author_col, ylab='coordinate 2', xlab='coordinate
 text(pca_sqrt$pca$x[,1:2],labels=label, col=rainbow(25)[rank(times)], cex=0.5) #WAS 0.5
 
 
-plot(c(0,cumsum(pca_sqrt$pca$sdev^2)/sum(pca_sqrt$pca$sdev^2)), ylim=c(0,1), xlab='PC number', ylab='Cumulative % variance explained', pch=19, cex=0.75)
+plot(c(cumsum(pca_sqrt$pca$sdev^2)/sum(pca_sqrt$pca$sdev^2)), ylim=c(0,1), xlab='PC number', ylab='Cumulative % variance explained', pch=19, cex=0.75)
