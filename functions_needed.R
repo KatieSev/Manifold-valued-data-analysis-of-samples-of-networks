@@ -193,7 +193,7 @@ estSS<-function (S, weights = 1){
   for (j in 1:M) {
     Q[, , j] <- t(H) %*% (rootmat(S[, , j]))
   }
-  ans <- fgpa.rot(Q, tol1=1e-05, tol2=1e-05, proc.output = TRUE, 
+  ans <- fgpa.rot(Q, tol1=1e-05, tol2=1e-05, proc.output = FALSE, 
                   reflect = TRUE)   
   out<-t(H %*% ans$mshape) %*% (H %*% ans$mshape) #changed order of transpose so rotation has affect
   (out+t(out))/2
