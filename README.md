@@ -6,3 +6,6 @@ EP/M02315X/1]. The authors are grateful to Michaela Mahlberg, Viola Wiegand and 
 The data are obtained from CLiC https://clic.bham.ac.uk (see Mahlberg et al., 2016). 
 
 MAHLBERG, M., STOCKWELL, P., DE JOODE, J., SMITH, C. and O’DONNELL, M. B. (2016). CLiC Dickens: novel uses of concordances for the integration of corpus stylistics and cognitive poetics. Corpora 11 433-463.
+
+
+Example: producing_plots.R  provides plots and analysis for the top 100 words in the novels. The paper itself uses the top 1000 words.
