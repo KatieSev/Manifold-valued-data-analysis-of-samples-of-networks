@@ -10,4 +10,6 @@ MAHLBERG, M., STOCKWELL, P., DE JOODE, J., SMITH, C. and O’DONNELL, M. B. (201
 
 # Example 
 
-producing_plots.R  provides plots and analysis for the top 100 words in the novels. 
+producing_plots.R  
+
+provides plots and analysis using the most common 100 words in the novels. 
