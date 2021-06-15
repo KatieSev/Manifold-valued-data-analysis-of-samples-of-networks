@@ -14,3 +14,6 @@ The data are obtained from CLiC https://clic.bham.ac.uk (see [2]).
 To produce the results in [1], run
 
 source('main_script_to_run.R') 
+
+Only including the top 100 words in the graph Laplcians has been set as the default, for efficiency,
+but this may be changed to 1000 (as in the paper) by chaning 'topwords<-1000' in main_script_to_run.R.
