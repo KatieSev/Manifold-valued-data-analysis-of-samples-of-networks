@@ -17,3 +17,5 @@ source('main_script_to_run.R')
 
 Only including the top 100 words in the graph Laplcians has been set as the default, for efficiency,
 but this may be changed to 1000 (as in the paper) by changing 'topwords<-1000' in main_script_to_run.R.
+
+The latest code is available at: https://github.com/KatieSev/Manifold-valued-data-analysis-of-samples-of-networks
