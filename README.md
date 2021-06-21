@@ -1,9 +1,13 @@
 # Manifold-valued-data-analysis-of-samples-of-networks
 Code to produce results in [1].
 
+The latest code is available at: 
+
+https://github.com/KatieSev/Manifold-valued-data-analysis-of-samples-of-networks
+
 This work was supported by the Engineering and Physical Sciences Research Council [grant number EP/T003928/1 and 
 EP/M02315X/1]. The authors are grateful to Michaela Mahlberg, Viola Wiegand and Anthony Hennessey for their help and discussions about the data.
-The data are obtained from CLiC https://clic.bham.ac.uk (see [2]). The latest code is available at: https://github.com/KatieSev/Manifold-valued-data-analysis-of-samples-of-networks
+The data are obtained from CLiC https://clic.bham.ac.uk (see [2]). 
 
 [1] SEVERN, K., DRYDEN, I.L., and PRESTON, S.P. (2021). "Manifold valued data analysis of samples of networks, with applications in corpus linguistics", Annals of Applied Statistics (to appear). 
 
