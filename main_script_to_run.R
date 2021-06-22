@@ -1,11 +1,22 @@
 source('functions_needed.R')
 load("workspace for novels.RData")
 
+
 topwords <- 100 #code in paper is for topwords=1000
-L<- L[1:topwords,1:topwords, ]
+LC <- array(0, dim=c(topwords, topwords, 23))
+L <- array(0, dim=c(topwords, topwords, 23))
+#below converts LC and L to truncated version based on topwords value chosen
 for (i in 1:23){
-  List_L[[i]] <- List_L[[i]][1:topwords,1:topwords]
+  List_LC[[i]] <- as.matrix(List_LC_full[[i]][1:topwords,1:topwords])
+  List_L[[i]] <- as.matrix(List_LC_full[[i]][1:topwords,1:topwords])
+  diag(List_L[[i]]) <- 0
+  diag(List_L[[i]]) <- -rowSums(List_L[[i]])
+  List_L[[i]] <- List_L[[i]]/sum(diag(List_L[[i]]))
+  #
+  LC[,,i] <- List_LC[[i]]
+  L[,,i] <- List_L[[i]]
 }
+
 
 
 #MDS and dendrogram plots
