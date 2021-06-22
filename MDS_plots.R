@@ -19,11 +19,11 @@ for (i in 1:(nt-1)){
 }
 Dmateucl<-Dmat
 dend<-hclust(as.dist(Dmateucl),method="ward.D2") 
-plot(dend,labels=dickens_austen_ids, xlab="", main="", sub="", cex=0.5, xaxt='n')
+plot(dend,labels=labels, xlab="", main="", sub="", cex=0.5, xaxt='n')
 abline(h=0.08, lty=2)
 set.seed(1)
 plot(cmdscale(Dmateucl),type="n",ylab="MDS2", xaxt='n', yaxt='n', xlab="")
-text(cmdscale(Dmateucl),labels=dickens_austen_ids,col=novcol, cex=0.5, xaxt='n', yaxt='n')
+text(cmdscale(Dmateucl),labels=labels,col=novcol, cex=0.5, xaxt='n', yaxt='n')
 
 
 
